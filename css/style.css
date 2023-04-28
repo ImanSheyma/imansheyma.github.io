@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
+    ;
     box-sizing: border-box;
 }
 
@@ -18,6 +19,13 @@ body{
     border-radius: 20px;
     padding: 40px 35px;
     text-align: center;
+}
+
+.error{
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .search{
