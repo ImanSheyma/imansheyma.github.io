@@ -27,7 +27,7 @@ async function getWeatherByGeoPosition(lat, lon){
     getWeather(data);
 }
 
-function getWeather(data){
+async function getWeather(data){
     document.querySelector(".error").style.display = "none"
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
