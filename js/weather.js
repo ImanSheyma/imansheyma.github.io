@@ -14,7 +14,6 @@ async function checkWeather(city){
         document.querySelector(".error").style.display = "block"
     }
     else {
-        document.querySelector(".error").style.display = "none"
         var data = await response.json();
         getWeather(data);
     }
@@ -29,6 +28,7 @@ async function getWeatherByGeoPosition(lat, lon){
 }
 
 function getWeather(data){
+    document.querySelector(".error").style.display = "none"
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
