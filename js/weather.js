@@ -35,7 +35,6 @@ function getWeather(data){
 
     var isNight = data.weather[0].icon.match(pattern) == 'n';
 
-    console.log(isNight);
     if (data.weather[0].main == "Clouds") {
         if (isNight) weatherIcon.src = "images/clouds-night.png";
         else weatherIcon.src = "images/clouds.png";
