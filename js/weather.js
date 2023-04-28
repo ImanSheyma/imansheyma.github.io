@@ -9,12 +9,10 @@ const pattern = /n/g
 
 async function checkWeather(city){
     const response = await fetch(apiUrl + city + '&appid=' + apiKey);
-
     if(response.status == 404){
         document.querySelector(".error").style.display = "block"
     }
     else {
-        document.querySelector(".error").style.display = "none"
         var data = await response.json();
         getWeather(data);
     }
@@ -29,13 +27,15 @@ async function getWeatherByGeoPosition(lat, lon){
 }
 
 function getWeather(data){
+    document.querySelector(".error").style.display = "none"
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-    var isNight = pattern.test(data.weather[0].icon);
+    var isNight = data.weather[0].icon.match(pattern) == 'n';
 
+    console.log(isNight);
     if (data.weather[0].main == "Clouds") {
         if (isNight) weatherIcon.src = "images/clouds-night.png";
         else weatherIcon.src = "images/clouds.png";
@@ -56,6 +56,11 @@ function getWeather(data){
 
 searchBtn.addEventListener("click", ()=>{
     checkWeather(searchBox.value);
+})
+
+searchBox.addEventListener('keypress', (e)=>{
+    if(e.key === 'Enter')
+        checkWeather(searchBox.value);
 })
 
 const successCallback = (position) => {
