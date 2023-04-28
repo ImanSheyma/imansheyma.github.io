@@ -19,14 +19,6 @@ async function checkWeather(city){
     }
 }
 
-async function getWeatherByGeoPosition(lat, lon){
-    var url = "https://api.openweathermap.org/data/2.5/weather?units=metric&lat="
-        + lat + "&lon=" + lon + "&appid=" + apiKey;
-    const response = await fetch(url);
-    var data = await response.json();
-    getWeather(data);
-}
-
 async function getWeather(data){
     document.querySelector(".error").style.display = "none"
     document.querySelector(".city").innerHTML = data.name;
@@ -57,13 +49,3 @@ async function getWeather(data){
 searchBtn.addEventListener("click", ()=>{
     checkWeather(searchBox.value);
 })
-
-const successCallback = (position) => {
-    getWeatherByGeoPosition(position.coords.latitude, position.coords.longitude)
-};
-
-const errorCallback = (error) => {
-    console.log(error);
-};
-
-navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
